@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Risk Assessment</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="background-shape shape1"></div>
+<div class="background-shape shape2"></div>
+
+<div class="main-container">
+
+    <!-- Header -->
+    <div class="header-box">
+        <div class="logo-circle">
+            <i class="fa-solid fa-chart-line"></i>
+        </div>
+        <div>
+            <h1>Credit Risk Assessment</h1>
+            <p>AI Loan Default Prediction System</p>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <form action="/predict" method="POST">
+
+        <div class="input-group">
+            <label><i class="fa-solid fa-user"></i> Age</label>
+            <input type="number" name="Age"
+                   value="{{ request.form.get('Age','') }}" required>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fa-solid fa-wallet"></i> Income</label>
+            <input type="number" name="Income"
+                   value="{{ request.form.get('Income','') }}" required>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fa-solid fa-money-bill-wave"></i> Loan Amount</label>
+            <input type="number" name="LoanAmount"
+                   value="{{ request.form.get('LoanAmount','') }}" required>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fa-solid fa-star"></i> Credit Score</label>
+            <input type="number" name="CreditScore"
+                   value="{{ request.form.get('CreditScore','') }}" required>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fa-solid fa-briefcase"></i> Months Employed</label>
+            <input type="number" name="MonthsEmployed"
+                   value="{{ request.form.get('MonthsEmployed','') }}" required>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fa-solid fa-credit-card"></i> Credit Lines</label>
+            <input type="number" name="NumCreditLines"
+                   value="{{ request.form.get('NumCreditLines','') }}" required>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fa-solid fa-percent"></i> Interest Rate</label>
+            <input type="number" step="any" name="InterestRate"
+                   value="{{ request.form.get('InterestRate','') }}" required>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fa-solid fa-calendar-days"></i> Loan Term</label>
+            <input type="number" name="LoanTerm"
+                   value="{{ request.form.get('LoanTerm','') }}" required>
+        </div>
+
+        <div class="input-group full-width">
+            <label><i class="fa-solid fa-scale-balanced"></i> DTI Ratio</label>
+            <input type="number" step="any" name="DTIRatio"
+                   value="{{ request.form.get('DTIRatio','') }}" required>
+        </div>
+
+        <button type="submit" class="predict-btn">
+            <i class="fa-solid fa-bolt"></i> Predict Risk
+        </button>
+
+    </form>
+
+    <!-- Result -->
+    {% if prediction_text %}
+    <div class="result-box">
+        {{ prediction_text }}
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
